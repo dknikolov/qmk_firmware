@@ -14,6 +14,7 @@ Currently the following converters are available:
 | `promicro` | `kb2040`          |
 | `promicro` | `promicro_rp2040` |
 | `promicro` | `blok`            |
+| `promicro` | `stemcell`        |
 
 See below for more in depth information on each converter.
 
@@ -54,6 +55,7 @@ If a board currently supported in QMK uses a [Pro Micro](https://www.sparkfun.co
 | [Adafruit KB2040](https://learn.adafruit.com/adafruit-kb2040)          | `kb2040`          |
 | [SparkFun Pro Micro - RP2040](https://www.sparkfun.com/products/18288) | `promicro_rp2040` |
 | [Blok](https://boardsource.xyz/store/628b95b494dfa308a6581622)         | `blok`            |
+| [STeMCell](https://github.com/megamind4089/STeMCell)                   | `stemcell`        |
 
 Converter summary:
 
@@ -63,6 +65,7 @@ Converter summary:
 | `kb2040`          | `-e CONVERT_TO=kb2040`          | `CONVERT_TO=kb2040`          | `#ifdef CONVERT_TO_KB2040`          |
 | `promicro_rp2040` | `-e CONVERT_TO=promicro_rp2040` | `CONVERT_TO=promicro_rp2040` | `#ifdef CONVERT_TO_PROMICRO_RP2040` |
 | `blok`            | `-e CONVERT_TO=blok`            | `CONVERT_TO=blok`            | `#ifdef CONVERT_TO_BLOK`            |
+| `stemcell`        | `-e CONVERT_TO=stemcell`        | `CONVERT_TO=stemcell`        | `#ifdef CONVERT_TO_STEMCELL`        |
 
 ### Proton C :id=proton_c
 
@@ -93,6 +96,30 @@ The following defaults are based on what has been implemented for [RP2040](platf
 | USB Host (e.g. USB-USB converter)            | Not supported (USB host code is AVR specific and is not currently supported on ARM)                              |
 | [Split keyboards](feature_split_keyboard.md) | Partial via `PIO` vendor driver - heavily dependent on enabled features                                          |
 
-### SparkFun Pro Micro - RP2040 and Blok :id=promicro_rp2040 
+### SparkFun Pro Micro - RP2040 and Blok :id=promicro_rp2040
 
 Currently identical to  [Adafruit KB2040](#kb2040).
+
+### STeMCell :id=stemcell
+
+Feature set currently identical to [Proton C](#proton_c).
+
+There are two versions of STeMCell available, with different pinouts:
+  - v1.0.0 - STMC_VERSION=1
+  - v1.0.1 - STMC_VERSION=2 (default)
+
+The default version selected is v1.0.1. To compile for v1.0.0, use the following flag while compiling.
+
+```make
+-e STMC_VERSION=1
+```
+STeMCell has support to swap UART and I2C pins, to enable single-wire uart communication in STM chips.
+
+The following additional flags has to be used while compiling, based on the pin used for split communication.
+
+| Split Pin | Compile flags |
+|-----------|---------------|
+| D3        | -e STMC_US=yes|
+| D2        | Not needed    |
+| D1        | -e STMC_IS=yes|
+| D0        | Not needed    |

@@ -45,6 +45,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* COL2ROW, ROW2COL*/
 #define DIODE_DIRECTION COL2ROW
 
+#define WS2812_PWM_DRIVER PWMD2
+#define WS2812_PWM_CHANNEL 4
+#define WS2812_PWM_PAL_MODE 1
+#define WS2812_DMA_STREAM STM32_DMA1_STREAM1
+#define WS2812_DMA_CHANNEL 3
+
 #define RGB_DI_PIN D3 // 41
 #ifdef RGBLIGHT_ENABLE
   // Use twinkle as the default rgb mode for the layers

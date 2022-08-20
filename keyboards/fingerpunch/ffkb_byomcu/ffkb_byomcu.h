@@ -26,7 +26,7 @@
  * represents the switch matrix.
  */
 
-// 1-40 are the keyswitches, and 50 and 51 are the rotary encoders
+// With the shift register, define the columns in the order of A-H as defined in the schematic
 #define LAYOUT_ffkb( \
     K01, K02, K03, K04, K05, K06,           K07, K08, K09, K0A, K0B, K0C, \
     K11, K12, K13, K14, K15, K16,           K17, K18, K19, K1A, K1B, K1C, \
@@ -35,13 +35,40 @@
                                     K3A \
 ) \
 { \
-    { K01,   K02,   K03,   K04, K05, K06, K07, K08 }, \
-    { K11,   K12,   K13,   K14, K15, K16, K17, K18 }, \
-    { K21,   K22,   K23,   K24, K25, K26, K27, K28 }, \
-    { KC_NO, KC_NO, K19,   K2A, K0A, K1B, K2B, K0C }, \
-    { KC_NO, K3A,   K29,   K09, K1A, K0B, K2C, K1C }, \
-    { K3B,   K32,   K39,   K34, K35, K36, K37, K38 } \
+    { K01,   K03,  K05, K04, K06, K07, K08, K02   }, \
+    { K11,   K13,  K15, K14, K16, K17, K18, K12   }, \
+    { K21,   K23,  K25, K24, K26, K27, K28, K22   }, \
+    { KC_NO, K19,  K0A, K2A, K1B, K2B, K0C, KC_NO }, \
+    { KC_NO, K29,  K1A, K09, K0B, K2C, K1C, K3A   }, \
+    { K3B,   K39,  K35, K34, K36, K37, K38, K32   } \
 }
 
+// This one works for matrix_74hc595_spi.c
+/*
+    { K01,   K03,  K05, K04, K06, K07, K08, K02   }, \
+    { K11,   K13,  K15, K14, K16, K17, K18, K12   }, \
+    { K21,   K23,  K25, K24, K26, K27, K28, K22   }, \
+    { KC_NO, K19,  K0A, K2A, K1B, K2B, K0C, KC_NO }, \
+    { KC_NO, K29,  K1A, K09, K0B, K2C, K1C, K3A   }, \
+    { K3B,   K39,  K35, K34, K36, K37, K38, K32   } \
+*/
 
-// KC_NO, K32, KC_NO, K34, K35, K36, K37, K38
+// This one worked on matrix_fingerpunch.c
+/*
+    { K02,   K01,   K03,  K05, K04, K06, K07, K08 }, \
+    { K12,   K11,   K13,  K15, K14, K16, K17, K18 }, \
+    { K22,   K21,   K23,  K25, K24, K26, K27, K28 }, \
+    { KC_NO, KC_NO, K19,  K0A, K2A, K1B, K2B, K0C }, \
+    { K3A,   KC_NO, K29,  K1A, K09, K0B, K2C, K1C }, \
+    { K32,   K3B,   K39,  K35, K34, K36, K37, K38 } \
+*/
+
+// Stock ffkb v2 map
+/*
+    { K01,   K02,   K03,  K04, K05, K06, K07, K08 }, \
+    { K11,   K12,   K13,  K14, K15, K16, K17, K18 }, \
+    { K21,   K22,   K23,  K24, K25, K26, K27, K28 }, \
+    { KC_NO, KC_NO, K19,  K2A, K0A, K1B, K2B, K0C }, \
+    { KC_NO, K3A,   K29,  K09, K1A, K0B, K2C, K1C }, \
+    { K3B,   K32,   K39,  K34, K35, K36, K37, K38 } \
+*/

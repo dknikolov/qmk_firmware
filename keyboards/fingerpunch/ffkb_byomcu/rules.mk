@@ -16,7 +16,7 @@ BOOTLOADER = atmel-dfu
 #
 BOOTMAGIC_ENABLE = no       # Virtual DIP switch configuration
 EXTRAKEY_ENABLE = yes       # Audio control and System control
-CONSOLE_ENABLE = no        # Console for debug
+CONSOLE_ENABLE = yes        # Console for debug
 COMMAND_ENABLE = no        # Commands for debug and configuration
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
@@ -25,8 +25,8 @@ NKRO_ENABLE = no            # USB Nkey Rollover
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 
 # Either do RGBLIGHT_ENABLE or RGB_MATRIX_ENABLE and RGB_MATRIX_DRIVER
-RGBLIGHT_ENABLE = yes
-RGB_MATRIX_ENABLE = yes
+RGBLIGHT_ENABLE = no
+RGB_MATRIX_ENABLE = no
 RGB_MATRIX_DRIVER = WS2812
 
 MIDI_ENABLE = no            # MIDI support
@@ -34,9 +34,17 @@ UNICODE_ENABLE = no         # Unicode
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 AUDIO_ENABLE = no           # Audio output on port C6
 FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
-ENCODER_ENABLE = yes
-OLED_DRIVER_ENABLE = yes    # this can be yes or no depending on if you have an OLED
+ENCODER_ENABLE = no
+OLED_DRIVER_ENABLE = no    # this can be yes or no depending on if you have an OLED
 EXTRAFLAGS     += -flto     # macros disabled, as a lot of barobord features require more space, can move this line into all the individual rules.mk, only where needed
                             # for instance, if you build "no_features", it's very unlikely you'll need to disable macros
 MOUSEKEY_ENABLE = no
 
+# shift register
+## non-spi approach
+# SRC += matrix_fingerpunch.c
+# CUSTOM_MATRIX = lite
+## spi approach
+SRC += matrix_74hc595_spi.c
+QUANTUM_LIB_SRC += spi_master.c
+CUSTOM_MATRIX = lite

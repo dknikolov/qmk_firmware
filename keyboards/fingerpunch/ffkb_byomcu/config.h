@@ -32,11 +32,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 8
 
-// wiring
-#define MATRIX_ROW_PINS \
-    { D2, F4, F5, F6, F7, B1 }
-#define MATRIX_COL_PINS \
-    { B5, B4, E6, D7, C6, D4, B2, B3 }
+// SHIFT REGISTER
+// Only needed for matrix_fingerpunch.c
+// #define SHIFTREG_MATRIX_COL_LATCH B6
+// #define SHIFTREG_MATRIX_COL_CLK B1
+// #define SHIFTREG_MATRIX_COL_DATA B2
+// Only needed for matrix_74hc595_spi.c
+#define SHIFTREG_MATRIX_COL_CS B6
+#define SHIFTREG_DIVISOR 8 // needs to be the same as the PMW33XX_CS_DIVISOR below
+/* Row pin definitions */
+#define MATRIX_ROW_PINS_SR { D2, F4, F5, F6, F7, D4 }
+
 #define UNUSED_PINS
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
@@ -119,8 +125,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #endif
 
-#define ENCODERS_PAD_A {D5, B6, D1}
-#define ENCODERS_PAD_B {B7, F1, D0}
+#define ENCODERS_PAD_A {C6, E6}
+#define ENCODERS_PAD_B {D7, D7}
 
 #define ENCODER_RESOLUTION 2
 // Per encoder settings
@@ -138,7 +144,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // cirque trackpad config
 #define CIRQUE_PINNACLE_ADDR 0x2A
-#define POINTING_DEVICE_ROTATION_90
 #define POINTING_DEVICE_TASK_THROTTLE_MS 5
 #define I2C1_CLOCK_SPEED  400000
 #define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
@@ -147,3 +152,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define ENCODERS_B_REVERSE
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 5
+
+// Trackball config
+// Move into pwm3360 feature directory
+#define PMW33XX_CS_PIN B5
+#define PMW33XX_CPI 400
+#define PMW33XX_CS_DIVISOR 8 // needs to be the same as the SHIFTREG_DIVISOR above
+#define POINTING_DEVICE_INVERT_Y
+
+/* SPI config for pmw3360 sensor. */
+#define SPI_DRIVER SPID1
+#define SPI_SCK_PIN B1
+#define SPI_SCK_PAL_MODE 5
+#define SPI_MOSI_PIN B2
+#define SPI_MOSI_PAL_MODE 5
+#define SPI_MISO_PIN B3
+#define SPI_MISO_PAL_MODE 5
+// end Trackball config

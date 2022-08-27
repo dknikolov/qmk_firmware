@@ -20,3 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 #include "config_common.h"
+
+
+#define TAPPING_TERM 200
+#define IGNORE_MOD_TAP_INTERRUPT
+#define CIRQUE_PINNACLE_POSITION_MODE CIRQUE_PINNACLE_ABSOLUTE_MODE
+#define POINTING_DEVICE_GESTURES_CURSOR_GLIDE_ENABLE
+#define POINTING_DEVICE_GESTURES_SCROLL_ENABLE
+#define CIRQUE_PINNACLE_TAP_ENABLE

@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,  KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,         KC_Y,    KC_U,         KC_I,         KC_O,         KC_P,             KC_BSPC,
   KC_TAB,  LCTL_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LSFT_T(KC_F), KC_G,         KC_H,    RSFT_T(KC_J), RALT_T(KC_K), RGUI_T(KC_L), RCTL_T(KC_SCLN),  KC_QUOT,
   KC_LSFT, KC_Z,         KC_X,         KC_C,         KC_V,         KC_B,         KC_N,    KC_M,         KC_COMM,      KC_DOT,       KC_SLSH,          KC_RSFT,
-                       KC_MUTE,      KC_BSLS,        KC_ENT,       LOWER,        RAISE,   KC_SPC,       KC_DEL,       LCTL(KC_BSPC),
+                       KC_BTN2,      KC_BSLS,        KC_ENT,       LOWER,        RAISE,   KC_SPC,       KC_DEL,       KC_MUTE,
                                                                         LALT(KC_TAB)
 ),
 
@@ -186,9 +186,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         #else
         if (clockwise) {
         #endif
-            tap_code(KC_VOLU);
+            tap_code(KC_WH_U);
         } else {
-            tap_code(KC_VOLD);
+            tap_code(KC_WH_D);
         }
     }
     else if (index == 1) {
@@ -199,10 +199,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
       #else
       if (clockwise) {
       #endif
-        tap_code16(C(KC_RGHT));
+        // tap_code16(C(KC_RGHT));
+        tap_code(KC_VOLU);
       }
       else{
-        tap_code16(C(KC_LEFT));
+        // tap_code16(C(KC_LEFT));
+        tap_code(KC_VOLD);
       }
     }
     else if (index == 2) {
